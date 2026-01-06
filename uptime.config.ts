@@ -3,12 +3,12 @@ import { MaintenanceConfig, PageConfig, WorkerConfig } from './types/config'
 
 // 1. 页面配置 (PageConfig)
 const pageConfig: PageConfig = {
-  // 状态页标题
+  // 你的状态页标题
   title: "GeoRyan's Status",
   // 页面右上角的链接
   links: [
     { link: 'https://georyan.top', label: 'Homepage' },
-    { link: 'mailto:i@georyan.top', label: 'Contact Me', highlight: true },
+    { link: 'mailto:i@georyan.top', label: 'Email Me', highlight: true },
   ],
 }
 
@@ -25,7 +25,7 @@ const workerConfig: WorkerConfig = {
       target: 'https://nas.georyan.top/',
       tooltip: 'CasaOS Home',
       statusPageLink: 'https://nas.georyan.top/',
-      timeout: 10000, //
+      timeout: 10000,
       // [关键] 只有响应包含 'CasaOS' 才算正常
       responseKeyword: 'CasaOS',
     },
@@ -61,17 +61,30 @@ const workerConfig: WorkerConfig = {
     },
   ],
 
-  // 通知设置 (暂时留空，防止报错，你可以随时按需开启)
+  // 通知设置
   notification: {
+    // 这里设置时区，这会影响状态页上显示的“最后检查时间”
     timeZone: 'Asia/Shanghai',
+    // 宽限期：连续失败 5 次后才会视为掉线（防止网络抖动误报）
     gracePeriod: 5,
+    
+    // 如果你以后想加 Telegram 通知，可以在这里把 webhook 的注释解开并填入 Token
+    // webhook: {
+    //   url: 'https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage',
+    //   payloadType: 'json',
+    //   payload: {
+    //     chat_id: '<YOUR_CHAT_ID>',
+    //     text: '$MSG',
+    //   },
+    // },
   },
 }
 
 // 3. 维护配置 (MaintenanceConfig)
-// 文档特别强调：即使不用，也必须保留这一行，否则部署会失败
+// 我把你原文件里的 "Test Maintenance" 删掉了，改成了空数组
+// 这样你的状态页才会显示 "All Systems Operational" (所有系统正常)
 const maintenances: MaintenanceConfig[] = []
 
 // 4. 导出配置 (关键修复)
-// 这一行必须有，否则 Next.js 会报 "not a module" 错误
+// 这一行绝对不能少，否则会报 "not a module" 错误
 export { maintenances, pageConfig, workerConfig }
