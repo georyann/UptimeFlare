@@ -43,7 +43,7 @@ const workerConfig: WorkerConfig = {
       tooltip: 'Web Disk Login',
       statusPageLink: 'https://cloud.georyan.top/',
       timeout: 10000,
-      responseKeyword: 'Login', // 检测通用的 Login 关键字
+      responseKeyword: 'OpenList', // 检测通用的 Login 关键字
     },
   ],
   notification: {
